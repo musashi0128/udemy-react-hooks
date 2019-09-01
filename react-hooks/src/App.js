@@ -1,8 +1,16 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 
 const App = props => {
   const [state, setState] = useState(props)
   const {name, price} = state
+
+  useEffect(() => {
+    console.log('userEffect in invoked')
+  },[])
+
+  useEffect(() => {
+    console.log('This callbacl is for name')
+  },[name])
 
   const reset = () => {
     setState(props)
@@ -10,7 +18,7 @@ const App = props => {
 
   return (
     <>
-      <p>現在の{name}は、{price}円です</p>
+      <p>現在の{name}は、{price}円です。</p>
       <button onClick={() => setState({...state, price: price + 1})}>+1</button>
       <button onClick={() => setState({...state, price: price - 1})}>-1</button>
       <button onClick={(reset)}>Reset</button>
